@@ -11,7 +11,6 @@
 
      public event UnityAction CreationFinished;
      
-     [Inject]
      public PlayerFactory(DiContainer diContainer, MarksProvider marksProvider)
      {
          _diContainer = diContainer;
