@@ -1,0 +1,27 @@
+﻿using EventSystem;
+using GameScene.PlayerEntities.View;
+
+namespace GameScene.PlayerEntities
+{
+    public class PlayerEventRule
+    {
+        private EventManager _eventManager;
+
+        private PlayerView _playerView;
+        private PlayerService _playerService;
+        
+        public PlayerEventRule(EventManager eventManager, PlayerView playerView, PlayerService playerService)
+        {
+            _eventManager = eventManager;
+            _playerView = playerView;
+            _playerService = playerService;
+
+            SetCallBack();
+        }
+        
+        private void SetCallBack()
+        {
+            _eventManager.AddListener<StartGameEvent>(evt => _playerService.Instantiate());
+        }
+    }
+}

@@ -1,2 +1,5 @@
 ﻿    
-public class GameEvent { }
+namespace EventSystem
+{
+    public class GameEvent { }
+}
