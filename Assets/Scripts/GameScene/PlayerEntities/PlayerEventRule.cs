@@ -1,5 +1,6 @@
 ﻿using EventSystem;
 using GameScene.PlayerEntities.View;
+using Zenject;
 
 namespace GameScene.PlayerEntities
 {
@@ -21,7 +22,7 @@ namespace GameScene.PlayerEntities
         
         private void SetCallBack()
         {
-            _eventManager.AddListener<StartGameEvent>(evt => _playerService.Instantiate());
+            _eventManager.AddListener<StartGameEvent>(evt => _playerService.Initialize());
         }
     }
 }

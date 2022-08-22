@@ -1,5 +1,6 @@
 ﻿using EventSystem;
 using MarkEntities.System;
+using UnityEngine;
 using Zenject;
 
 namespace GameScene
@@ -14,6 +15,7 @@ namespace GameScene
         public GameSceneStartGate(EventManager eventManager, MarksProvider marksProvider)
         {
             _eventManager = eventManager;
+            _marksProvider = marksProvider;
             SubscribeToPendingServices();
         }
     

@@ -19,7 +19,8 @@ namespace GameScene.PlayerEntities.ModelSystems.Router
             var agentComponent = agent.GetComponent<NavMeshAgent>();
             _agent = agentComponent;
             _agentPathState = new AgentPathStateObserver(agentComponent);
-        
+            _agentPathState.AgentFinishPath += () => PlayerReachedWayPoint?.Invoke();
+            
             _wayPoints = new Stack<Transform>(wayPoints);
         }
     

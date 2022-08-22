@@ -43,7 +43,7 @@ namespace EventSystem
         {
             if (_events.TryGetValue(evt.GetType(), out var action))
             {
-                action.Invoke(evt);   
+                action?.Invoke(evt);   
             }
         }
     };

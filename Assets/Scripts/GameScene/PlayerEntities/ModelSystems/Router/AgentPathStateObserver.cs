@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace GameScene.PlayerEntities.ModelSystems.Router
@@ -9,8 +10,7 @@ namespace GameScene.PlayerEntities.ModelSystems.Router
         
         public event Action AgentFinishPath;
         
-        private bool IsDestinationReached() =>
-            _agent.hasPath && IsAgentArrived; 
+        private bool IsDestinationReached() => !(_agent.hasPath) && IsAgentArrived; 
             
         public AgentPathStateObserver(NavMeshAgent agent)
         {

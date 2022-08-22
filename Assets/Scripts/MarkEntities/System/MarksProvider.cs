@@ -17,7 +17,7 @@ namespace MarkEntities.System
         
             DetectPlayerSpawn(allMark);
             CollectPlayerWayPoint(allMark);
-        
+            
             MarkGathered?.Invoke();
         }
 
@@ -26,6 +26,7 @@ namespace MarkEntities.System
             PlayerSpawnPoint = (
                 from p in allMark
                 where p.Type == MarksType.PlayerSpawn
+                orderby p.Priority descending
                 select p.transform).ToArray()?[0];
         }
 

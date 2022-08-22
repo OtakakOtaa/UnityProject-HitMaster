@@ -11,6 +11,7 @@ namespace GameScene.PlayerEntities
     {
         private MarksProvider _marksProvider;
         private PlayerView _player;
+        
         private PlayerRouter _playerRouter;
 
         public PlayerService(PlayerView player, MarksProvider marksProvider)
@@ -19,12 +20,12 @@ namespace GameScene.PlayerEntities
             _player = player;
         }
 
-        public void Instantiate()
+        public void Initialize()
         {
-            Debug.Log("Instantiate");
             _player.transform.position = _marksProvider.PlayerSpawnPoint.position;
             _playerRouter = new PlayerRouter(_player.GetComponent<NavMeshAgent>(), _marksProvider.PlayerWayPoints);
             SetStartState();
+            _playerRouter.PlayerReachedWayPoint += _playerRouter.GoToNextPoint;
         }
     
         public void Tick()
