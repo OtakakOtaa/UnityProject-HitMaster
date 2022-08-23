@@ -3,12 +3,15 @@ using GameScene.PlayerEntities.View;
 using MarkEntities.System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using Zenject;
 
 namespace GameScene.PlayerEntities
 {
     public class PlayerService : ITickable
     {
+        public event UnityAction InitializeEnd;
+        
         private MarksProvider _marksProvider;
         private PlayerView _player;
         
@@ -18,14 +21,17 @@ namespace GameScene.PlayerEntities
         {
             _marksProvider = marksProvider;
             _player = player;
+            _marksProvider.MarkGathered += Initialize;
         }
 
-        public void Initialize()
+        private void Initialize()
         {
             _player.transform.position = _marksProvider.PlayerSpawnPoint.position;
+            _player.transform.rotation = Quaternion.Euler(14, 510, 0);
             _playerRouter = new PlayerRouter(_player.GetComponent<NavMeshAgent>(), _marksProvider.PlayerWayPoints);
             SetStartState();
-            _playerRouter.PlayerReachedWayPoint += _playerRouter.GoToNextPoint;
+            
+            InitializeEnd?.Invoke();
         }
     
         public void Tick()
@@ -33,9 +39,10 @@ namespace GameScene.PlayerEntities
             _playerRouter?.Update();
         }
 
-        private void SetStartState()
+        public void SetStartState()
         {
             _playerRouter.GoToNextPoint();
+            _playerRouter.PlayerReachedWayPoint += _playerRouter.GoToNextPoint;
         }
     }
 }

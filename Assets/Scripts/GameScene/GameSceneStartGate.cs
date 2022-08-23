@@ -1,4 +1,5 @@
 ﻿using EventSystem;
+using GameScene.PlayerEntities;
 using MarkEntities.System;
 using UnityEngine;
 using Zenject;
@@ -9,28 +10,28 @@ namespace GameScene
     {
         private EventManager _eventManager;
 
-        [Inject] private MarksProvider _marksProvider;
-        private bool _marksProviderFulfilled = false;
+        [Inject] private PlayerService _playerService;
+        private bool _playerInstalled = false;
         
-        public GameSceneStartGate(EventManager eventManager, MarksProvider marksProvider)
+        public GameSceneStartGate(EventManager eventManager, PlayerService playerService)
         {
             _eventManager = eventManager;
-            _marksProvider = marksProvider;
+            _playerService = playerService;
             SubscribeToPendingServices();
         }
     
         private void SubscribeToPendingServices()
         {
-            _marksProvider.MarkGathered += () =>
+            _playerService.InitializeEnd += () =>
             {
-                _marksProviderFulfilled = true;
+                _playerInstalled = true;
                 TryStartGame();
             };
         }
 
         private void TryStartGame()
         {
-            if (_marksProviderFulfilled)
+            if (_playerInstalled)
                 _eventManager.Broadcast(_eventManager.GlobalEventsList.startGameEvent);
         }
     }

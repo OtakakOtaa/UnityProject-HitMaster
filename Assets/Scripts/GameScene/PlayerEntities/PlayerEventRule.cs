@@ -22,7 +22,6 @@ namespace GameScene.PlayerEntities
         
         private void SetCallBack()
         {
-            _eventManager.AddListener<StartGameEvent>(evt => _playerService.Initialize());
         }
     }
 }
