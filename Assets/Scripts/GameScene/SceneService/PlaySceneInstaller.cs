@@ -2,7 +2,7 @@ using MarkEntities.System;
 using UnityEngine;
 using Zenject;
 
-namespace GameScene
+namespace GameScene.SceneService
 {
     public class PlaySceneInstaller : MonoInstaller
     {

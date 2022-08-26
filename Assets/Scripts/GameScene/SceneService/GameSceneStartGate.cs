@@ -1,10 +1,8 @@
 ﻿using EventSystem;
 using GameScene.PlayerEntities;
-using MarkEntities.System;
-using UnityEngine;
 using Zenject;
 
-namespace GameScene
+namespace GameScene.SceneService
 {
     public class GameSceneStartGate
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 
-namespace GameScene
+namespace GameScene.SceneService
 {
     public class GameInput : ITickable
     {

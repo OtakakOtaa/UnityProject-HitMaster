@@ -8,7 +8,8 @@ namespace MarkEntities.System
     {
         public Transform[] PlayerWayPoints { get; private set; }
         public Transform PlayerSpawnPoint { get; private set; }
-
+        public Transform[] EnemySpawnPoints { get; private set; }
+        
         public event UnityAction MarkGathered;
     
         private void Start()
@@ -17,6 +18,7 @@ namespace MarkEntities.System
         
             DetectPlayerSpawn(allMark);
             CollectPlayerWayPoint(allMark);
+            CollectEnemySpawn(allMark);
             
             MarkGathered?.Invoke();
         }
@@ -38,5 +40,15 @@ namespace MarkEntities.System
                 orderby p.Priority descending
                 select p.transform).ToArray();
         } 
+        
+        private void CollectEnemySpawn(ObjectMark[] allMark)
+        {
+            EnemySpawnPoints = (
+                from p in allMark
+                where p.Type == MarksType.EnemySpawn
+                orderby p.Priority descending
+                select p.transform).ToArray();
+        }
+        
     }
 }

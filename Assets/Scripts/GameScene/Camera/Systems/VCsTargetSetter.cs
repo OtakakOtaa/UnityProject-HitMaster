@@ -1,15 +1,16 @@
-﻿using Cinemachine;
+﻿using System;
+using Cinemachine;
 using UnityEngine;
 
-namespace GameScene.Camera
+namespace GameScene.Camera.Systems
 {
     public class VCsTargetSetter
     {
-        public InspectorSettings _cameras { get; private set; }
+        private readonly VCs _cameras;
 
-        private VCsTargetSetter(InspectorSettings settings)
+        private VCsTargetSetter(VCs cameras)
         {
-            _cameras = settings;
+            _cameras = cameras;
         }
         
         public void Set(Transform target)
@@ -25,7 +26,7 @@ namespace GameScene.Camera
         }
 
         
-        [SerializeField] public class InspectorSettings
+        [Serializable] public class VCs
         {
             [SerializeField] private CinemachineVirtualCamera _walkingCamera;
             [SerializeField] private CinemachineVirtualCamera _fightCamera;

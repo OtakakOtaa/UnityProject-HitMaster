@@ -6,7 +6,7 @@
             = new StartGameEvent();
     }
     
-    public class StartGameEvent : GameEvent
-    {
-    }
+    public class StartGameEvent : GameEvent { }
+    
+    public class StartFitchEvent : GameEvent { }
 }
